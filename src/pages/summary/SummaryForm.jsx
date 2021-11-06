@@ -13,7 +13,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 const popover = (
   <Popover id="popover-basic">
-    <Popover.Header as="h3">Popover right</Popover.Header>
+    <Popover.Header style={{ color: 'black'}} as="h3">Popover title</Popover.Header>
     <Popover.Body>
       No ice cream will actually be delivered
     </Popover.Body>
