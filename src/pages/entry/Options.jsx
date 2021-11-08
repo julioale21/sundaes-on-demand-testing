@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-
 import ScoopOption from './ScoopOption';
 import ToppingOption from './ToppingOption';
 import AlertBanner from '../common/AlertBanner';
+import { Row } from 'react-bootstrap';
+import { pricePerItem } from '../../constants';
+import { useOrderDetails } from '../../contexts/OrderDetails';
 
 const Options = ({ optionType }) => {
   // optionType is 'scoops' or 'toppings'
@@ -24,6 +26,7 @@ const Options = ({ optionType }) => {
 
   // TODO: replace 'null' with ToppingOption when available
   const ItemComponent = optionType === 'scoops' ? ScoopOption : ToppingOption;
+  const title = optionType[0].toUpperCase() + optionType.slice(1).toLowerCase();
 
   const optionItems = items.map((item) => (
     <ItemComponent 
@@ -34,9 +37,11 @@ const Options = ({ optionType }) => {
   ));
 
   return (
-    <div>
-      {optionItems}
-    </div>
+    <>
+      <h2>{title}</h2>
+      <p>{pricePerItem[optionType]} each</p>
+      <Row>{optionItems}</Row>
+    </>
   )
 }
 
