@@ -1,8 +1,13 @@
 import React from 'react';
+import { Col, Row } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
 
-import { Col } from 'react-bootstrap';
+const ScoopOption = ({ name, imagePath, updateItemCount }) => {
 
-const ScoopOption = ({ name, imagePath }) => {
+  const handleChange = (event) => {
+    updateItemCount(name, event.target.value);
+  };
+
   return (
     <Col xs={12} sm={6} md={4} lg={3} style={{ textAlign: 'center' }}>
       <img 
@@ -10,6 +15,18 @@ const ScoopOption = ({ name, imagePath }) => {
         src={`http://localhost:3030/${imagePath}`} 
         alt={`${name} scoop`} 
       />
+      <Form.Group controlId={`${name}-count`} as={Row} style={{ marginTop: '10px' }}>
+        <Form.Label column xs="6" style={{ textAlign: 'rigth' }}>
+          {name}
+        </Form.Label>
+        <Col xs="5" style={{ textAlign: 'left' }}>
+          <Form.Control 
+            type="number" 
+            defaultValue={0} 
+            onChange={handleChange}
+          />
+        </Col>
+      </Form.Group>
     </Col>
   )
 }

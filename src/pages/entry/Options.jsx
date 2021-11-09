@@ -11,6 +11,7 @@ const Options = ({ optionType }) => {
   // optionType is 'scoops' or 'toppings'
   const [items, setItems] = useState([]);
   const [error, setError] = useState(false);
+  const [orderDetails, updateItemCount] = useOrderDetails();
 
   useEffect(() => {
     axios.get(`http://localhost:3030/${optionType}`)
@@ -33,6 +34,7 @@ const Options = ({ optionType }) => {
       key={item.name} 
       name={item.name} 
       imagePath={item.imagePath} 
+      updateItemCount={(itemName, newItemCount) => updateItemCount(itemName, newItemCount, optionType)}
     />
   ));
 
@@ -40,6 +42,7 @@ const Options = ({ optionType }) => {
     <>
       <h2>{title}</h2>
       <p>{pricePerItem[optionType]} each</p>
+      <p>{title} total: {orderDetails.totals[optionType]}</p>
       <Row>{optionItems}</Row>
     </>
   )
