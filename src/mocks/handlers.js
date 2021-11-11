@@ -17,6 +17,10 @@ export const handlers = [
         { name: 'M&Ms', imagePath: '/images/m-and-ms.png' },
         { name: 'Hot Fudge', imagePath: '/images/hot-fudge.png' },
       ])
-    )
-  })
+    );
+  }),
+
+  rest.post('http://localhost:3030/toppings', (req, res, ctx) => {
+    return res(ctx.json({ orderNumber: 12345676 }));
+  }),
 ];
